@@ -4,6 +4,11 @@ import settings
 class Data:
 
     def __get_merged_df(self) -> pd.DataFrame:
+        """Creates a dataframe containing all data for the application, by merging data from different sources.
+
+        Returns:
+            pd.DataFrame: A dataframe containing all data for the application.
+        """        
 
         # Create dataframes
         try: 

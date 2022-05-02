@@ -33,18 +33,5 @@ class Data:
         # Return the merged data, but only with the columns we'll actually use
         return df_merged[["state", "party", "cases", "deaths", "cases_per_thousand_people", "deaths_per_thousand_people", "deaths_per_thousand_cases"]]
 
-    def __format_state_chart_df(self, column: str) -> pd.DataFrame:
-        return self.merged_df[["state", column]].sort_values(by=column, ascending=False)
-
     def __init__(self):
         self.merged_df = self.__get_merged_df()
-        self.state_count = len(self.merged_df['state'].unique())
-        self.cases_per_thousand_people_df = self.__format_state_chart_df("cases_per_thousand_people")
-        self.deaths_per_thousand_people_df = self.__format_state_chart_df("deaths_per_thousand_people")
-        self.deaths_per_thousand_cases_df = self.__format_state_chart_df("deaths_per_thousand_cases")
-        self.cases_per_thousand_people_best_state = self.cases_per_thousand_people_df.iloc[-1]["state"]
-        self.cases_per_thousand_people_worst_state = self.cases_per_thousand_people_df.iloc[0]["state"]
-        self.deaths_per_thousand_people_best_state = self.deaths_per_thousand_people_df.iloc[-1]["state"]
-        self.deaths_per_thousand_people_worst_state = self.deaths_per_thousand_people_df.iloc[0]["state"]
-        self.deaths_per_thousand_cases_best_state = self.deaths_per_thousand_cases_df.iloc[-1]["state"]
-        self.deaths_per_thousand_cases_worst_state = self.deaths_per_thousand_cases_df.iloc[0]["state"]

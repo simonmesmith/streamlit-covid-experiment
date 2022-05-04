@@ -1,10 +1,33 @@
+import string
 import pandas as pd
 import settings
 
 class Data:
 
+    def __merge_dfs(self, *dfs: pd.DataFrame, on: str) -> pd.DataFrame:
+        """Merges provided dataframes.
+
+        Args:
+            self: The class instance.
+            *dfs: A list of dataframes to merge.
+            on (str): The column to merge on (same as for pandas.DataFrame.merge)
+
+        Returns:
+            pd.DataFrame: A single dataframe consolidating data from the provided dataframes.
+        """
+
+        for i, df in enumerate(dfs):
+            if i == 0:
+                df_merged = df
+            else:
+                df_merged = pd.merge(df_merged, df, on=on)
+        return df_merged
+
     def __get_merged_df(self) -> pd.DataFrame:
         """Creates a dataframe containing all data for the application, by merging data from different sources.
+
+        Args:
+            self: The class instance.
 
         Returns:
             pd.DataFrame: A dataframe containing all data for the application.
@@ -30,10 +53,8 @@ class Data:
         # Drop the population column from the vaccination data to avoid a conflict with the existing population data.
         df_vaccination.drop("population", axis=1, inplace=True)
 
-        # Merge the datasets.    
-        df_merged = pd.merge(df_covid, df_party, on="state")
-        df_merged = pd.merge(df_merged, df_population, on="state")
-        df_merged = pd.merge(df_merged, df_vaccination, on="state")
+        # Merge the datasets.
+        df_merged = self.__merge_dfs(df_covid, df_party, df_population, df_vaccination, on="state")
 
         # Create calculated columns
         df_merged["cases_per_thousand_people"] = round(df_merged["cases"]/(df_merged["population"]/1000), 2)

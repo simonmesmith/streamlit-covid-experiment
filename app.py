@@ -10,7 +10,8 @@ st.title("US COVID Data Analysis")
 state_sections = [
     "Cases per thousand people",
     "Deaths per thousand people",
-    "Deaths per thousand cases"
+    "Deaths per thousand cases",
+    "Percent unvaccinated"
 ]
 
 # Loop through each state section and write out the user interface

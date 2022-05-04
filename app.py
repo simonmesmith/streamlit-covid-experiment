@@ -62,4 +62,3 @@ temperature_chart = alt.Chart(d.merged_df).mark_circle().encode(
          alt.Tooltip("deaths_per_thousand_cases", title="Deaths per thousand cases")
     ])
 st.altair_chart(temperature_chart, use_container_width=True)
-print(d.merged_df)

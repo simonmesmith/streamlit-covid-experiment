@@ -1,4 +1,6 @@
 altair
+beautifulsoup4
+lxml
 pandas
 pytest
 streamlit

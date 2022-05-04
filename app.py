@@ -33,6 +33,7 @@ for section in state_sections:
     chart = alt.Chart(df[:states_to_show]).mark_bar().encode(    
         x=alt.X(column, title=section),
         y=alt.Y("state", sort=[column], title="State"),
+        tooltip=[alt.Tooltip(field=column, title=section)]
     )
     st.altair_chart(chart, use_container_width=True)
 
@@ -42,5 +43,23 @@ for section in state_sections:
     chart = alt.Chart(d.merged_df).mark_bar().encode(    
         x=alt.X(f"mean({column})", title=f"Mean {section.lower()}"),
         y=alt.Y("party", sort=[f"mean({column})"], title="Party"),
+        tooltip=[alt.Tooltip(field=column, title=section)]
         )
     st.altair_chart(chart, use_container_width=True)
+
+# Create the temperature analysis chart
+st.header("Temperature and COVID")
+st.write("This chart shows the relationship between a state's average temperature (in Fahrenheit) and COVID.")
+temperature_chart = alt.Chart(d.merged_df).mark_circle().encode(
+     x=alt.X("average_fahrenheit", title="Average Fahrenheit"),
+     y=alt.Y("cases_per_thousand_people", title="Cases per thousand people"), 
+     size="deaths_per_thousand_cases", 
+     color="state", 
+     tooltip=[
+         alt.Tooltip("state", title="State"),
+         alt.Tooltip("average_fahrenheit", title="Average Fahrenheit"), 
+         alt.Tooltip("cases_per_thousand_people", title="Cases per thousand people"), 
+         alt.Tooltip("deaths_per_thousand_cases", title="Deaths per thousand cases")
+    ])
+st.altair_chart(temperature_chart, use_container_width=True)
+print(d.merged_df)

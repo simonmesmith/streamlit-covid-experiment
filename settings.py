@@ -2,3 +2,4 @@ covid_csv_url = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/
 party_csv_url = "https://raw.githubusercontent.com/CivilServiceUSA/us-governors/master/us-governors/data/us-governors.csv"
 population_csv_url = "https://raw.githubusercontent.com/CivilServiceUSA/us-states/master/data/states.csv"
 vaccination_csv_url = "https://raw.githubusercontent.com/BloombergGraphics/covid-vaccine-tracker-data/master/data/current-usa.csv"
+average_temperature_url = "https://www.currentresults.com/Weather/US/average-annual-state-temperatures.php"
